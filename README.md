@@ -1,6 +1,15 @@
-<div align="center">
+<picture>
+  <source
+    media="(prefers-color-scheme: light)" srcset="./public/imgs/HestIAbannerclaro.jpg" width="100%"
+  >
+  <img
+    src="./public/imgs/HestIAbanner.jpg" alt="HestIA banner black" width="100%"
+  >
+</picture>
+
+<!-- <div align="center">
     <img src="./public/imgs/HestIAbanner.jpg" alt="HestIA banner" width="100%">
-</div>
+</div> -->
 
 # HestIA (Frontend) - Asistente culinario inteligente
 
@@ -83,10 +92,20 @@
 
 ## Autores
 
-&#129364; [Antonella Simonetti](https://github.com/AntonellaSimonetti)
+&#129744; [Ann Giuliani Melissa](https://github.com/Melissa-Ann-Giuliani)
 
-&#129389; [Betania Rojas](https://github.com/Betastica)
+&#127827; [Cejas Diana](https://github.com/dianacejas)
+
+&#127813; [Chicconi Luca](https://github.com/LucaChicconi)
+
+&#127825; [Coca Guadalupe](https://github.com/gcoca-sys)
+
+&#129381; [Geier Daniel](https://github.com/DanyGeier)
+
+&#129389; [Rojas Betania](https://github.com/Betastica)
+
+&#127818; [Simonetti Antonella](https://github.com/AntonellaSimonetti)
 
 ## Maquetado
 
-&#128279; [Ver maqueta en Figma](https://www.figma.com/design/7hycHYWoKrz0G1Yd8HOlGA/HestIA-Prototype?node-id=495-3442&t=mSVmfTvgGtpia0jK-0)
+&#128279; <a href="https://www.figma.com/design/7hycHYWoKrz0G1Yd8HOlGA/HestIA-Prototype?node-id=495-3442&t=mSVmfTvgGtpia0jK-0" title="Maquetado Figma" target="_blank">Ver maqueta en Figma</a>
