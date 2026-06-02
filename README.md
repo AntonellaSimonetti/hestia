@@ -87,6 +87,8 @@
 
 &#129389; [Betania Rojas](https://github.com/Betastica)
 
+&#127813; [Luca Chicconi](https://github.com/LucaChicconi)
+
 ## Maquetado
 
 &#128279; [Ver maqueta en Figma](https://www.figma.com/design/7hycHYWoKrz0G1Yd8HOlGA/HestIA-Prototype?node-id=495-3442&t=mSVmfTvgGtpia0jK-0)
