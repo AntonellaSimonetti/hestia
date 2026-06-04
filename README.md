@@ -88,15 +88,38 @@
 
 ## Estructura del proyecto
 
-<p>&#128679; En construcción</p>
+```
+hestia-frontend/
+├── public/
+│   └── imgs/
+│       ├── HestIAbanner.jpg
+│       ├── HestIAbannerclaro.jpg
+│       └── logo.png
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── styles/
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+```
 
 ## Autores
 
-&#129744; [Ann Giuliani Melissa](https://github.com/Melissa-Ann-Giuliani)
+&#127826; [Giuliani Melissa Ann](https://github.com/Melissa-Ann-Giuliani)
 
 &#127827; [Cejas Diana](https://github.com/dianacejas)
 
-&#127813; [Chicconi Luca](https://github.com/LucaChicconi)
+&#127813; [Chicconi Luca Martín](https://github.com/LucaChicconi)
 
 &#127825; [Coca Guadalupe](https://github.com/gcoca-sys)
 
@@ -105,6 +128,8 @@
 &#129389; [Rojas Betania](https://github.com/Betastica)
 
 &#127818; [Simonetti Antonella](https://github.com/AntonellaSimonetti)
+
+&#127822; [Vega María Candela](https://github.com/candevega)
 
 ## Maquetado
 
