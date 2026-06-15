@@ -1,8 +1,12 @@
+import Header from './components/layout/header'
+import Footer from './components/layout/footer'
+
 function App() {
   return (
-    <div>
-      <h1>Hestia</h1>
-    </div>
+    <>
+      <Header />
+      <Footer />
+    </>
   )
 }
 
