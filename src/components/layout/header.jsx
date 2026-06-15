@@ -21,7 +21,7 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           <img
-            src={isDark ? '/logo-dark.png' : '/logo.png'}
+            src={isDark ? '/imgs/logo-dark.png' : '/imgs/logo.png'}
             alt="HestIA"
             className="h-10 w-auto"
           />
