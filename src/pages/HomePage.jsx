@@ -1,14 +1,9 @@
-import Header from "../components/layout/header";
-import Footer from "../components/layout/footer";
 import { Camera, Star, ChefHat } from "lucide-react";
 
 function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-(--hestia-bg)">
-      <Header />
-
       <main>
-        <section className="py-16 md:py-20 bg-(--hestia-card)">
+        <section className="py-27 md:py-31 bg-(--hestia-card)">
           <div className="max-w-5xl mx-auto px-6">
             <div className="text-center space-y-3 mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-(--hestia-text)">
@@ -64,9 +59,6 @@ function HomePage() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </div>
   );
 }
 

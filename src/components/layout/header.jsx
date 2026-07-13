@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/despensa', label: 'Despensa' },
   { href: '/recetas', label: 'Recetas' },
   { href: '/colecciones', label: 'Colecciones' },
+  { href:'/sobre-nosotros', label: 'Sobre Nosotros'}
 ]
 
 export default function Header() {
