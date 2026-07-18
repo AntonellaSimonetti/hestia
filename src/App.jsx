@@ -3,6 +3,7 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/footer'
 import HomePage from './pages/HomePage'
 import AboutUsPage from './pages/AboutUsPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre-nosotros" element={<AboutUsPage />} />
+          <Route path="/perfil" element={<LoginPage />} />
         </Routes>
       </div>
 
