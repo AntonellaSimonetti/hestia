@@ -248,3 +248,53 @@ h2,
 .dark .match-high   { background: rgba(34, 139, 34, 0.18); color: #6dbf6d; }
 .dark .match-medium { background: rgba(184, 115, 51, 0.18); color: #e0a050; }
 .dark .match-low    { background: rgba(192, 64, 32, 0.18);  color: #e8795a; }
+
+/* Carrusel */
+
+/* El contenedor oculta lo que se sale de la pantalla */
+.slider-container {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  background: transparent; /* O el color de fondo de tu app */
+  padding: 20px 0;
+}
+
+/* La pista que se mueve horizontalmente */
+.slider-track {
+  display: flex;
+  width: calc(150px * 14); /* Ajusta según el tamaño y cantidad de elementos */
+  animation: scroll 20s linear infinite;
+}
+
+/* Cada icono individual */
+.slide {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* La magia de la animación: se desplaza exactamente la mitad (la primera lista) */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-150px * 7)); /* El ancho de una sola tanda de iconos */
+  }
+}
+
+/* 1. Esta es la animación del botón de fueguito */
+@keyframes flicker {
+  0%   { transform: rotate(-4deg) scale(1); }
+  25%  { transform: rotate(3deg) scale(1.08); }
+  50%  { transform: rotate(-2deg) scale(1.04); }
+  75%  { transform: rotate(4deg) scale(1.1); }
+  100% { transform: rotate(-4deg) scale(1); }
+}
+
+/* 2. Esto es para usar esa animación, pero solo cuando hay hover */
+.flame-hover:hover {
+  animation: flicker 0.6s ease-in-out infinite;
+}
