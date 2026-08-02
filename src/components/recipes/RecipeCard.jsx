@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Heart, Clock, ChefHat, Users } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
