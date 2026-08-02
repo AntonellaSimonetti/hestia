@@ -78,7 +78,7 @@ export const team = [
         foto: "/imgs/maia.png",
         linkedin: "https://www.linkedin.com/in/maia-alcon/",
         github: "https://github.com/MixHAA",
-        cita: "",
-        autorCita: "Steve Jobs",
+        cita: "No importa lo lento que vayas mientras no pares",
+        autorCita: "Andy Warhol",
     },
 ];
