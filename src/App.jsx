@@ -4,6 +4,7 @@ import Footer from './components/layout/footer'
 import HomePage from './pages/HomePage'
 import AboutUsPage from './pages/AboutUsPage'
 import LoginPage from './pages/LoginPage'
+import DespensaPage from './pages/Despensa'
 
 function App() {
   return (
