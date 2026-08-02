@@ -142,8 +142,21 @@ function AboutUs() {
                             </div>
                             {/* Separador */}
                             <hr className="border-(--hestia-border) mb-4"/>
-                            {/* Descripción */}
-                            <p className="text-sm text-(--hestia-text) mb-4 text-center">{selectedMember.descripcion}</p>
+                            {/* Frase y Autor */}
+                            {selectedMember.cita && (
+                                <figure className="text-center mb-4 px-2">
+                                <blockquote className="italic text-s text-(--hestia-text)">
+                                <span className="text-xl text-(--hestia-accent) font-serif mr-1">“</span>
+                                {selectedMember.cita}
+                                <span className="text-xl text-(--hestia-accent) font-serif ml-1">”</span>
+                                </blockquote>
+                                {selectedMember.autorCita && (
+                                <figcaption className="text-xs text-(--hestia-muted) mt-2 font-medium">
+                                — <cite className="not-italic">{selectedMember.autorCita}</cite>
+                                </figcaption>
+                                    )}
+                                 </figure>
+                                )}
                             {/* Separador */}
                             <hr className="border-(--hestia-border) mb-4"/>
                             {/* Redes */}
