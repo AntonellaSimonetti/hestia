@@ -43,8 +43,8 @@ export const team = [
         foto: "/imgs/meli.png",
         linkedin: "https://www.linkedin.com/in/melissa-ann-giuliani-91530b37a/",
         github: "https://github.com/Melissa-Ann-Giuliani",
-        cita: "",
-        autorCita: "",
+        cita: "May your heart be your guiding key",
+        autorCita: "Kingdom Hearts",
     },
         {
         id:"EsDiana",
