@@ -162,9 +162,11 @@ function normalizeRecipe(recipe) {
           ? recipe.ingredients
           : [],
     matchPercent:
-      typeof recipe.matchPercent === "number"
-        ? recipe.matchPercent
-        : calculatedMatchPercent,
+      recipe.matchPercent === null
+        ? null
+        : typeof recipe.matchPercent === "number"
+          ? recipe.matchPercent
+          : calculatedMatchPercent,
   };
 }
 
@@ -209,7 +211,16 @@ export default function RecetasPage() {
           : publicData.recipes || [];
 
         if (!token) {
-          setRecipes(publicRecipes.map(normalizeRecipe));
+          const recipesWithoutPersonalMatch = publicRecipes.map((recipe) =>
+            normalizeRecipe({
+              ...recipe,
+              matchPercent: null,
+              availableIngredients: [],
+              missingIngredients: [],
+            }),
+          );
+
+          setRecipes(recipesWithoutPersonalMatch);
           return;
         }
 

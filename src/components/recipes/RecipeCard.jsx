@@ -198,24 +198,26 @@ export default function RecipeCard({ recipe }) {
         </div>
 
         {/* Ingredients */}
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-(--hestia-muted)">
-            <span className="font-semibold text-(--hestia-text)">
-              {availableIngredients.length}
-            </span>{" "}
-            disponibles
-          </span>
-
-          {missingIngredients.length > 0 && (
+        {matchPercent !== null && (
+          <div className="flex items-center gap-2 text-xs">
             <span className="text-(--hestia-muted)">
-              ·{" "}
-              <span className="font-semibold text-(--hestia-accent)">
-                {missingIngredients.length}
+              <span className="font-semibold text-(--hestia-text)">
+                {availableIngredients.length}
               </span>{" "}
-              faltantes
+              disponibles
             </span>
-          )}
-        </div>
+
+            {missingIngredients.length > 0 && (
+              <span className="text-(--hestia-muted)">
+                ·{" "}
+                <span className="font-semibold text-(--hestia-accent)">
+                  {missingIngredients.length}
+                </span>{" "}
+                faltantes
+              </span>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );
