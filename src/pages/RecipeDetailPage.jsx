@@ -73,9 +73,11 @@ function normalizeRecipe(recipe) {
     },
 
     matchPercent:
-      typeof recipe.matchPercent === "number"
-        ? recipe.matchPercent
-        : calculatedMatchPercent,
+      recipe.matchPercent === null
+        ? null
+        : typeof recipe.matchPercent === "number"
+          ? recipe.matchPercent
+          : calculatedMatchPercent,
 
     availableIngredients: Array.isArray(recipe.availableIngredients)
       ? recipe.availableIngredients
@@ -268,7 +270,13 @@ export default function RecipeDetailPage() {
         } else {
           const publicData = await request(`/api/recipes/${id}`);
 
-          loadedRecipe = publicData.recipe || publicData;
+          loadedRecipe = {
+            ...(publicData.recipe || publicData),
+            matchPercent: null,
+            availableIngredients: [],
+            missingIngredients: [],
+            ingredientDetails: [],
+          };
         }
 
         const normalized = normalizeRecipe(loadedRecipe);
