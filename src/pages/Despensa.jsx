@@ -818,40 +818,81 @@ export default function DespensaPage() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
+            {/* Ingredientes */}
             <div>
-              <h3 className="mb-2 text-sm font-semibold text-(--hestia-text)">
+              <h3 className="mb-3 text-sm font-semibold text-(--hestia-text)">
                 Ingredientes
               </h3>
 
-              <ul className="space-y-2 text-sm text-(--hestia-muted)">
-                {(generatedRecipe.ingredients || []).map(
-                  (ingredient, index) => (
-                    <li key={`${ingredient.name}-${index}`}>
+              <ul className="space-y-2">
+                {(
+                  generatedRecipe.ingredientDetails ||
+                  generatedRecipe.ingredients ||
+                  []
+                ).map((ingredient, index) => {
+                  const ingredientName =
+                    typeof ingredient === "string"
+                      ? ingredient
+                      : ingredient.name;
+
+                  const quantity =
+                    typeof ingredient === "object" ? ingredient.quantity : "";
+
+                  const available =
+                    typeof ingredient === "object" &&
+                    typeof ingredient.available === "boolean"
+                      ? ingredient.available
+                      : null;
+
+                  return (
+                    <li key={`${ingredientName}-${index}`} className="text-sm">
                       <span className="font-medium text-(--hestia-text)">
-                        {ingredient.name}
+                        {ingredientName}
                       </span>
-                      {ingredient.quantity ? ` · ${ingredient.quantity}` : ""}
-                      {ingredient.available
-                        ? " · Disponible"
-                        : " · Falta comprar"}
+
+                      {quantity && (
+                        <span className="text-(--hestia-text)/75">
+                          {" "}
+                          · {quantity}
+                        </span>
+                      )}
+
+                      {available === true && (
+                        <span className="font-semibold text-green-600 dark:text-green-400">
+                          {" "}
+                          · Disponible
+                        </span>
+                      )}
+
+                      {available === false && (
+                        <span className="font-semibold text-red-600 dark:text-red-400">
+                          {" "}
+                          · Falta comprar
+                        </span>
+                      )}
                     </li>
-                  ),
-                )}
+                  );
+                })}
               </ul>
             </div>
 
+            {/* Preparación */}
             <div>
-              <h3 className="mb-2 text-sm font-semibold text-(--hestia-text)">
+              <h3 className="mb-3 text-sm font-semibold text-(--hestia-text)">
                 Preparación
               </h3>
 
-              <ol className="space-y-2 text-sm text-(--hestia-muted)">
+              <ol className="space-y-3 text-sm">
                 {(generatedRecipe.steps || []).map((step, index) => (
-                  <li key={`${index}-${step}`}>
-                    <span className="font-semibold text-(--hestia-accent)">
+                  <li
+                    key={`${index}-${step}`}
+                    className="flex gap-2 leading-relaxed text-(--hestia-text)"
+                  >
+                    <span className="font-bold text-(--hestia-accent) shrink-0">
                       {index + 1}.
-                    </span>{" "}
-                    {step}
+                    </span>
+
+                    <span>{step}</span>
                   </li>
                 ))}
               </ol>
