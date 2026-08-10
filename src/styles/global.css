@@ -13,8 +13,8 @@
   --hestia-card-2: #ede4dc;
   --hestia-text: #4a1e12;
   --hestia-accent: #8a2e16;
-  --hestia-accent-2: #894432;
-  --hestia-muted: rgba(74, 30, 18, 0.5);
+  --hestia-accent-2: #e23206;
+  --hestia-muted: rgba(74, 30, 18, 0.786);
   --hestia-border: rgba(74, 30, 18, 0.12);
   --hestia-sidebar: #ede4dc;
   --hestia-input: #f0dcd2;
@@ -106,7 +106,7 @@
   --sidebar-border: rgba(236, 199, 190, 0.08);
   --sidebar-ring: #c04020;
 
-  --match-low: #5e1c22;
+  --match-low: #761922;
   --match-medium: #deb331;
   --match-high: #40b59a;
 }
