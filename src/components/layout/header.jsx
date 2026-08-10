@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router'
-import { Moon, Sun, User, Menu, X } from 'lucide-react'
-import { useApp } from '../../context/app-context'
+import { useState } from "react";
+import { Link, useLocation } from "react-router";
+import { Moon, Sun, User, Menu, X } from "lucide-react";
+import { useApp } from "../../context/app-context";
 
 const navLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/despensa', label: 'Despensa' },
-  { href: '/recetas', label: 'Recetas' },
-  { href: '/colecciones', label: 'Colecciones' },
-  { href:'/sobre-nosotros', label: 'Sobre Nosotros'}
-]
+  { href: "/", label: "Inicio" },
+  { href: "/despensa", label: "Despensa" },
+  { href: "/recetas", label: "Recetas" },
+  { href: "/colecciones", label: "Colecciones" },
+  { href: "/sobre-nosotros", label: "Sobre Nosotros" },
+];
 
 export default function Header() {
-  const { isDark, toggleTheme } = useApp()
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
+  const { isDark, toggleTheme } = useApp();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-border">
@@ -22,12 +22,11 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           <img
-            src={isDark ? '/imgs/logo-dark.png' : '/imgs/logo.png'}
+            src={isDark ? "/imgs/logo-dark.png" : "/imgs/logo.png"}
             alt="HestIA"
             className="h-10 w-auto"
           />
-
-          <span className="font-newsreader text-2xl font-bold text-primary italic">
+          <span className="font-newsreader text-2xl font-bold text-title italic">
             HestIA
           </span>
         </Link>
@@ -35,7 +34,7 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-2">
           {navLinks.map(({ href, label }) => {
-            const active = location.pathname === href
+            const active = location.pathname === href;
 
             return (
               <Link
@@ -45,22 +44,19 @@ export default function Header() {
                   px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
                   ${
                     active
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
                   }
                 `}
               >
                 {label}
               </Link>
-            )
+            );
           })}
         </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-1">
-          
-
-
           <button
             onClick={toggleTheme}
             className="p-2 rounded-xl text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
@@ -100,5 +96,5 @@ export default function Header() {
         </div>
       )}
     </header>
-  )
+  );
 }

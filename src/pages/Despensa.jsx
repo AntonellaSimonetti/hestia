@@ -50,6 +50,16 @@ const CATEGORY_ICONS = {
   Bebidas: "🧃",
 };
 
+const CATEGORY_EMOJIS = {
+  Verduras: ["🥬", "🥦", "🥕", "🍅", "🥔", "🧅", "🧄", "🌶️"],
+  Carnes: ["🥩", "🍗", "🥓", "🐟", "🍤", "🥚"],
+  Lácteos: ["🥛", "🧀", "🧈", "🥚"],
+  Secos: ["🌾", "🍚", "🍝", "🍞", "🥖", "🫘", "🥜"],
+  Condimentos: ["🧂", "🫙", "🍯", "🌶️", "🧄"],
+  Frutas: ["🍎", "🍌", "🍊", "🍋", "🍓", "🍇", "🍐", "🍑"],
+  Bebidas: ["💧", "🧃", "🥤", "☕", "🥛"],
+};
+
 const STATUS_LABEL = {
   fresh: "Fresco",
   expiring: "Por vencer",
@@ -155,36 +165,23 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-3">
-            <div className="flex flex-col gap-1 w-16">
-              <label className="text-xs text-(--hestia-muted)">Icono</label>
+          {/* Nombre */}
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-(--hestia-muted)">Nombre *</label>
 
-              <input
-                type="text"
-                value={icon}
-                onChange={(event) => setIcon(event.target.value)}
-                maxLength={2}
-                disabled={saving}
-                className="w-full text-center py-2 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-xl outline-none focus:border-(--hestia-accent)"
-              />
-            </div>
-
-            <div className="flex-1 flex flex-col gap-1">
-              <label className="text-xs text-(--hestia-muted)">Nombre *</label>
-
-              <input
-                autoFocus
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                placeholder="Ej: Tomate cherry"
-                required
-                disabled={saving}
-                className="w-full px-3 py-2 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) placeholder:text-(--hestia-muted) outline-none focus:border-(--hestia-accent) transition-colors"
-              />
-            </div>
+            <input
+              autoFocus
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Ej: Tomate cherry"
+              required
+              disabled={saving}
+              className="w-full px-3 py-2.5 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) placeholder:text-(--hestia-muted) outline-none focus:border-(--hestia-accent) transition-colors"
+            />
           </div>
 
-          <div className="flex flex-col gap-1">
+          {/* Categoría */}
+          <div className="flex flex-col gap-2">
             <label className="text-xs text-(--hestia-muted)">Categoría</label>
 
             <div className="flex flex-wrap gap-2">
@@ -193,19 +190,58 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
                   key={currentCategory}
                   type="button"
                   disabled={saving}
-                  onClick={() => setCategory(currentCategory)}
+                  onClick={() => {
+                    setCategory(currentCategory);
+                    setIcon(CATEGORY_EMOJIS[currentCategory][0]);
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
                     category === currentCategory
                       ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
                       : "border-(--hestia-border) text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
                   }`}
                 >
-                  {CATEGORY_ICONS[currentCategory]} {currentCategory}
+                  {CATEGORY_ICONS[currentCategory]}
+                  {currentCategory}
                 </button>
               ))}
             </div>
           </div>
 
+          {/* Selector de icono */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs text-(--hestia-muted)">Icono</label>
+
+              <span className="text-xs text-(--hestia-muted)">
+                Seleccionado: <span className="text-base">{icon}</span>
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {CATEGORY_EMOJIS[category].map((emoji) => (
+                <button
+                  key={emoji}
+                  type="button"
+                  disabled={saving}
+                  onClick={() => setIcon(emoji)}
+                  aria-label={`Seleccionar icono ${emoji}`}
+                  className={`
+            flex h-9 w-9 items-center justify-center
+            rounded-xl border text-lg transition-all
+            ${
+              icon === emoji
+                ? "border-(--hestia-accent) bg-(--hestia-chip-bg) scale-105"
+                : "border-(--hestia-border) bg-transparent hover:border-(--hestia-accent) hover:bg-(--hestia-chip-bg)"
+            }
+          `}
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cantidad y unidad */}
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1">
               <label className="text-xs text-(--hestia-muted)">Cantidad</label>
@@ -241,6 +277,7 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
             </div>
           </div>
 
+          {/* Vencimiento */}
           <div className="flex flex-col gap-1">
             <label className="text-xs text-(--hestia-muted)">
               Vence en (días, -1 = vencido)
@@ -256,6 +293,7 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
             />
           </div>
 
+          {/* Acciones */}
           <div className="flex gap-3 pt-1">
             <button
               type="button"
@@ -716,7 +754,7 @@ export default function DespensaPage() {
           <button
             type="button"
             onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-(--hestia-card) border border-(--hestia-border) text-(--hestia-text) text-sm font-semibold hover:border-(--hestia-accent) transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-(--hestia-accent) text-(--hestia-accent) text-sm font-semibold hover:bg-(--hestia-chip-bg) transition-all disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Plus size={16} />
             <span className="hidden sm:inline">Agregar</span>
