@@ -57,13 +57,13 @@
 
 /* ===================== HestIA DARK THEME ===================== */
 .dark {
-  --hestia-bg: #050505;
+  --hestia-bg: #0F100A;
   --hestia-card: #2C180F;
   --hestia-card-2: #1E1209;
   --hestia-text: #ECC7BE;
   --hestia-accent: #C04020;
   --hestia-accent-2: #A03010;
-  --hestia-muted: rgba(236, 199, 190, 0.5);
+  --hestia-muted: #ecc7bed6;
   --hestia-border: rgba(236, 199, 190, 0.1);
   --hestia-sidebar: #070A05;
   --hestia-input: #2C180F;
@@ -71,18 +71,18 @@
   --hestia-chip-text: #E8795A;
   --hestia-overlay: rgba(5, 5, 5, 0.88);
 
-  --background: #050505;
+  --background: #0F100A;
   --foreground: #ECC7BE;
   --card: #2C180F;
   --card-foreground: #ECC7BE;
   --popover: #2C180F;
   --popover-foreground: #ECC7BE;
-  --primary: #C04020;
+  --primary: #E77858;
   --primary-foreground: #F5F0EE;
   --secondary: #2C180F;
   --secondary-foreground: #ECC7BE;
   --muted: #1E1209;
-  --muted-foreground: rgba(236, 199, 190, 0.55);
+  --muted-foreground: #f5f5f0e7;
   --accent: #2C180F;
   --accent-foreground: #ECC7BE;
   --destructive: #8B1A1A;

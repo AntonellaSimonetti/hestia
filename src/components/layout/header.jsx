@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router'
-import { Moon, Sun, Search, User, Menu, X } from 'lucide-react'
+import { Moon, Sun, User, Menu, X } from 'lucide-react'
 import { useApp } from '../../context/app-context'
 
 const navLinks = [
@@ -58,19 +58,8 @@ export default function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-1">
-          <Link
-            to="/recetas"
-            className="hidden sm:flex p-2 rounded-xl text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-          >
-            <Search size={20} />
-          </Link>
+          
 
-          <Link
-            to="/perfil"
-            className="hidden sm:flex p-2 rounded-xl text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-          >
-            <User size={20} />
-          </Link>
 
           <button
             onClick={toggleTheme}
@@ -78,6 +67,13 @@ export default function Header() {
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
+
+          <Link
+            to="/perfil"
+            className="hidden sm:flex p-2 rounded-xl text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+          >
+            <User size={20} />
+          </Link>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
