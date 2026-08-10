@@ -14,7 +14,7 @@
   --hestia-text: #4a1e12;
   --hestia-accent: #8a2e16;
   --hestia-accent-2: #e23206;
-  --hestia-muted: rgba(74, 30, 18, 0.786);
+  --hestia-muted: rgba(74, 30, 18, 0.786); /*modificar este si no gusta el color de la letra*/
   --hestia-border: rgba(74, 30, 18, 0.12);
   --hestia-sidebar: #ede4dc;
   --hestia-input: #f0dcd2;

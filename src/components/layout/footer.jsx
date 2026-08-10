@@ -1,10 +1,9 @@
-
 export default function Footer() {
   return (
     <footer className="border-t border-(--hestia-border) bg-(--hestia-sidebar)">
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="max-w-6xl mx-auto px-6 py-6">
         <div className="flex items-end justify-between w-full">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <span className="font-newsreader text-2xl font-bold text-(--hestia-accent) italic">
               HestIA
             </span>

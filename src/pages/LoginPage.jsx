@@ -161,7 +161,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-(--hestia-card-2) px-4 py-10">
+    <div className="relative flex-1 flex items-center justify-center bg-(--hestia-card-2) px-4 py-4">
       <img
         src="/imgs/logo.png"
         alt=""
@@ -176,11 +176,11 @@ function LoginPage() {
         className="hidden dark:block absolute w-120 max-w-full opacity-20"
       />
 
-      <div className="relative z-10 w-full max-w-100 bg-(--hestia-accent)/15 backdrop-blur-lg border-2 border-(--hestia-border) rounded-2xl">
-        <div className="flex items-center justify-center my-5 mx-4">
+      <div className="relative z-10 w-full max-w-100 max-h-[90vh] overflow-y-auto bg-(--hestia-accent)/15 backdrop-blur-lg border-2 border-(--hestia-border) rounded-2xl">
+        <div className="flex items-center justify-center my-3 mx-4">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-5 w-full px-4 pb-5"
+            className="flex flex-col gap-4 w-full px-4 pb-4"
           >
             <div className="mb-4 text-center">
               <div>
