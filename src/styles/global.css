@@ -53,6 +53,11 @@
   --sidebar-accent-foreground: #8a2e16;
   --sidebar-border: rgba(74, 30, 18, 0.1);
   --sidebar-ring: #8a2e16;
+
+  /* Match colors */
+  --match-low: #dd0016;
+  --match-medium: #fbcf4f;
+  --match-high: #00a27d;
 }
 
 /* ===================== HestIA DARK THEME ===================== */
@@ -78,7 +83,7 @@
   --popover: #2c180f;
   --popover-foreground: #ecc7be;
   --title: #e77858;
-  --primary: #C04020;
+  --primary: #c04020;
   --primary-foreground: #f5f0ee;
   --secondary: #2c180f;
   --secondary-foreground: #ecc7be;
@@ -100,6 +105,10 @@
   --sidebar-accent-foreground: #e8795a;
   --sidebar-border: rgba(236, 199, 190, 0.08);
   --sidebar-ring: #c04020;
+
+  --match-low: #5e1c22;
+  --match-medium: #deb331;
+  --match-high: #40b59a;
 }
 
 @theme inline {
@@ -288,30 +297,19 @@
   outline-offset: 2px;
 }
 
-/* Match percent badge */
-.match-high {
-  background: rgba(34, 139, 34, 0.12);
-  color: #2d7a2d;
-}
-.match-medium {
-  background: rgba(184, 115, 51, 0.12);
-  color: #a0621a;
-}
+/* Match percent badge*/
+/* ===================== Match percent badge ===================== */
+
 .match-low {
-  background: rgba(138, 46, 22, 0.1);
-  color: #8a2e16;
+  color: var(--match-low);
 }
-.dark .match-high {
-  background: rgba(34, 139, 34, 0.18);
-  color: #6dbf6d;
+
+.match-medium {
+  color: var(--match-medium);
 }
-.dark .match-medium {
-  background: rgba(184, 115, 51, 0.18);
-  color: #e0a050;
-}
-.dark .match-low {
-  background: rgba(192, 64, 32, 0.18);
-  color: #e8795a;
+
+.match-high {
+  color: var(--match-high);
 }
 
 /* Carrusel */

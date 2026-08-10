@@ -117,10 +117,11 @@ export default function RecipeCard({ recipe }) {
         {matchPercent !== null && (
           <div className="absolute top-3 left-3">
             <span
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                matchPercent >= 85
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold bg-(--hestia-accent) border border-(--hestia-accent) backdrop-blur-sm
+              ${
+                matchPercent >= 60
                   ? "match-high"
-                  : matchPercent >= 70
+                  : matchPercent >= 40
                     ? "match-medium"
                     : "match-low"
               }`}
@@ -190,7 +191,14 @@ export default function RecipeCard({ recipe }) {
           {tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-0.5 rounded-full text-xs bg-(--hestia-chip-bg) text-(--hestia-chip-text) font-medium"
+              className="
+        px-2.5 py-0.5
+        rounded-full
+        text-xs font-medium
+        bg-(--hestia-accent)
+        border border-(--hestia-accent)
+        text-white
+      "
             >
               {tag}
             </span>
