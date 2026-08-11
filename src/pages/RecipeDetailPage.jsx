@@ -110,9 +110,9 @@ function calculateRecipeMatch(recipe, pantryItems) {
     ingredientDetails.length > 0
       ? ingredientDetails
       : (recipe.ingredients || []).map((name) => ({
-          name,
-          quantity: "",
-        }));
+        name,
+        quantity: "",
+      }));
 
   const usablePantryItems = pantryItems.filter(
     (item) => Number(item.quantity) > 0 && item.status !== "expired",
@@ -156,8 +156,8 @@ function calculateRecipeMatch(recipe, pantryItems) {
   const matchPercent =
     comparedIngredients.length > 0
       ? Math.round(
-          (availableIngredients.length / comparedIngredients.length) * 100,
-        )
+        (availableIngredients.length / comparedIngredients.length) * 100,
+      )
       : 0;
 
   return {
@@ -197,8 +197,8 @@ export default function RecipeDetailPage() {
       headers: {
         ...(token
           ? {
-              Authorization: `Bearer ${token}`,
-            }
+            Authorization: `Bearer ${token}`,
+          }
           : {}),
         ...options.headers,
       },
@@ -295,7 +295,7 @@ export default function RecipeDetailPage() {
 
           setSaved(
             favoritesData.recipes?.some((item) => item.id === normalized.id) ||
-              false,
+            false,
           );
 
           setCollections(collectionsData.collections || []);
@@ -445,13 +445,12 @@ export default function RecipeDetailPage() {
         {recipe.matchPercent !== null && (
           <div className="absolute top-4 left-4">
             <span
-              className={`px-3 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm ${
-                recipe.matchPercent >= 85
+              className={`px-3 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm ${recipe.matchPercent >= 85
                   ? "match-high"
                   : recipe.matchPercent >= 70
                     ? "match-medium"
                     : "match-low"
-              }`}
+                }`}
             >
               {recipe.matchPercent}% coincidencia
             </span>
@@ -464,11 +463,10 @@ export default function RecipeDetailPage() {
             onClick={toggleFavorite}
             disabled={busy}
             aria-label={saved ? "Quitar de favoritos" : "Guardar receta"}
-            className={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm border transition-all disabled:opacity-60 ${
-              saved
+            className={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm border transition-all disabled:opacity-60 ${saved
                 ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
                 : "bg-black/30 border-white/30 text-white hover:bg-(--hestia-accent)"
-            }`}
+              }`}
           >
             <Heart size={18} fill={saved ? "currentColor" : "none"} />
           </button>
@@ -710,13 +708,16 @@ export default function RecipeDetailPage() {
                     type="button"
                     disabled={busy}
                     onClick={() => toggleCollection(collection)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm font-medium transition-all border-(--hestia-border) text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent) hover:bg-(--hestia-chip-bg) disabled:opacity-60"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm font-medium transition-all disabled:opacity-60 ${included
+                        ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
+                        : "border-(--hestia-border) text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent) hover:bg-(--hestia-chip-bg)"
+                      }`}
                   >
                     {collection.emoji} {collection.name}
                     {included && (
                       <CheckCircle2
                         size={13}
-                        className="text-(--hestia-accent)"
+                        className="text-white)"
                       />
                     )}
                   </button>
@@ -733,11 +734,10 @@ export default function RecipeDetailPage() {
           type="button"
           onClick={toggleFavorite}
           disabled={busy}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 ${
-            saved
+          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 ${saved
               ? "bg-(--hestia-chip-bg) text-(--hestia-accent) border border-(--hestia-accent)"
               : "bg-(--hestia-accent) text-white"
-          }`}
+            }`}
         >
           <Heart size={18} fill={saved ? "currentColor" : "none"} />
 

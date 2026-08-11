@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Eye, EyeOff } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -19,6 +20,10 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [success, setSuccess] = useState("");
 
@@ -72,8 +77,18 @@ function LoginPage() {
         throw new Error("El nombre de usuario es obligatorio.");
       }
 
-      if (isRegistering && password.length < 8) {
-        throw new Error("La contraseña debe tener al menos 8 caracteres.");
+      if (isRegistering) {
+        const hasMinLength = password.length >= 8;
+        const hasLetter = /[A-Za-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialCharacter =
+          /[!@#$%^&*(),.?":{}|<>_\-+=/\\[\]';`~]/.test(password);
+
+        if (!hasMinLength || !hasLetter || !hasNumber || !hasSpecialCharacter) {
+          throw new Error(
+            "La contraseña debe tener al menos 8 caracteres e incluir una letra, un número y un símbolo especial.",
+          );
+        }
       }
 
       if (isRegistering && password !== formData.confirmPassword) {
@@ -161,7 +176,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-(--hestia-card-2) px-4 py-10">
+    <div className="relative flex-1 flex items-center justify-center bg-(--hestia-card-2) px-4 py-4">
       <img
         src="/imgs/logo.png"
         alt=""
@@ -176,11 +191,11 @@ function LoginPage() {
         className="hidden dark:block absolute w-120 max-w-full opacity-20"
       />
 
-      <div className="relative z-10 w-full max-w-100 bg-(--hestia-accent)/15 backdrop-blur-lg border-2 border-(--hestia-border) rounded-2xl">
-        <div className="flex items-center justify-center my-5 mx-4">
+      <div className="relative z-10 w-full max-w-100 max-h-[90vh] overflow-y-auto bg-(--hestia-accent)/15 backdrop-blur-lg border-2 border-(--hestia-border) rounded-2xl">
+        <div className="flex items-center justify-center my-3 mx-4">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-5 w-full px-4 pb-5"
+            className="flex flex-col gap-4 w-full px-4 pb-4"
           >
             <div className="mb-4 text-center">
               <div>
@@ -297,19 +312,33 @@ function LoginPage() {
                 Contraseña
               </label>
 
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="********"
-                autoComplete={
-                  isRegistering ? "new-password" : "current-password"
-                }
-                disabled={loading}
-                className="w-full rounded-xl border border-(--hestia-border) bg-(--hestia-bg) px-4 py-3 text-(--hestia-text) placeholder:text-(--hestia-muted) focus:outline-none focus:ring-1 focus:ring-(--hestia-accent) disabled:opacity-60"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="********"
+                  autoComplete={
+                    isRegistering ? "new-password" : "current-password"
+                  }
+                  disabled={loading}
+                  className="w-full rounded-xl border border-(--hestia-border) bg-(--hestia-bg) px-4 py-2.5 pr-12 text-(--hestia-text) placeholder:text-(--hestia-muted) focus:outline-none focus:ring-1 focus:ring-(--hestia-accent) disabled:opacity-60"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((current) => !current)}
+                  disabled={loading}
+                  aria-label={
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                  }
+                  className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-(--hestia-muted) hover:text-(--hestia-accent) transition-colors disabled:opacity-50"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             {isRegistering && (
@@ -321,20 +350,41 @@ function LoginPage() {
                   Confirmar contraseña
                 </label>
 
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="********"
-                  autoComplete="new-password"
-                  disabled={loading}
-                  className="w-full rounded-xl border border-(--hestia-border) bg-(--hestia-bg) px-4 py-3 text-(--hestia-text) placeholder:text-(--hestia-muted) focus:outline-none focus:ring-1 focus:ring-(--hestia-accent) disabled:opacity-60"
-                />
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="********"
+                    autoComplete="new-password"
+                    disabled={loading}
+                    className="w-full rounded-xl border border-(--hestia-border) bg-(--hestia-bg) px-4 py-2.5 pr-12 text-(--hestia-text) placeholder:text-(--hestia-muted) focus:outline-none focus:ring-1 focus:ring-(--hestia-accent) disabled:opacity-60"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowConfirmPassword((current) => !current)
+                    }
+                    disabled={loading}
+                    aria-label={
+                      showConfirmPassword
+                        ? "Ocultar contraseña"
+                        : "Mostrar contraseña"
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-(--hestia-muted) hover:text-(--hestia-accent) transition-colors disabled:opacity-50"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
+                </div>
               </div>
             )}
-
             <div className="flex justify-center">
               <button
                 type="submit"

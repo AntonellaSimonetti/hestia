@@ -32,7 +32,7 @@ function AboutUs() {
                         </div>
                     </div>
                 </section>
-                <section id="hestia-cifra" className="py-4 md:py-3 bg-(--hestia-sidebar)">
+                <section id="hestia-cifra" className="py-8 md:py-8 bg-(--hestia-sidebar)">
                     <div className="text-center space-y-3 mb-12">
                         <h2 className="font-serif text-2xl md:text-3xl font-bold text-(--hestia-text)">
                             <span className="font-newsreader italic text-3xl md:text-4xl text-(--hestia-accent)">HestIA</span> en cifras
@@ -94,7 +94,7 @@ function AboutUs() {
                 </section>
                 <section id="stack" className="py-5 md:py-5 bg-(--hestia-sidebar)">
                     <h2 className="font-serif text-2xl md:text-3xl font-bold text-(--hestia-text) pb-2.5 text-center">Tecnologías y Herramientas</h2>
-                        <Swiper modules={[Autoplay]} autoplay={{ delay: 1000, disableOnInteraction: false,}} loop={true} slidesPerView={3} spaceBetween={40}>
+                        <Swiper modules={[Autoplay]} autoplay={{ delay: 2000, disableOnInteraction: false,}} loop={true} slidesPerView={3} spaceBetween={40}>
 
                         {technologies.map((tech) => {
                         const Icon = tech.icon;

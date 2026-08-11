@@ -1,112 +1,123 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-
 /* ===================== HestIA LIGHT THEME ===================== */
 :root {
   /* Brand palette */
-  --hestia-bg: #F5F8F5;
-  --hestia-card: #F0DCD2;
-  --hestia-card-2: #EDE4DC;
-  --hestia-text: #4A1E12;
-  --hestia-accent: #8A2E16;
-  --hestia-accent-2: #894432;
-  --hestia-muted: rgba(74, 30, 18, 0.5);
+  --hestia-bg: #f5f8f5;
+  --hestia-card: #f0dcd2;
+  --hestia-card-2: #ede4dc;
+  --hestia-text: #4a1e12;
+  --hestia-accent: #8a2e16;
+  --hestia-accent-2: #e23206;
+  --hestia-muted: rgba(74, 30, 18, 0.786); /*modificar este si no gusta el color de la letra*/
   --hestia-border: rgba(74, 30, 18, 0.12);
-  --hestia-sidebar: #EDE4DC;
-  --hestia-input: #F0DCD2;
+  --hestia-sidebar: #ede4dc;
+  --hestia-input: #f0dcd2;
   --hestia-chip-bg: rgba(138, 46, 22, 0.1);
-  --hestia-chip-text: #8A2E16;
+  --hestia-chip-text: #8a2e16;
   --hestia-overlay: rgba(245, 248, 245, 0.85);
+  --title: #8a2e16;
 
   /* shadcn tokens remapped */
-  --background: #F5F8F5;
-  --foreground: #4A1E12;
-  --card: #F0DCD2;
-  --card-foreground: #4A1E12;
-  --popover: #F0DCD2;
-  --popover-foreground: #4A1E12;
-  --primary: #8A2E16;
-  --primary-foreground: #F5F8F5;
-  --secondary: #F0DCD2;
-  --secondary-foreground: #4A1E12;
-  --muted: #EDE4DC;
+  --background: #f5f8f5;
+  --foreground: #4a1e12;
+  --card: #f0dcd2;
+  --card-foreground: #4a1e12;
+  --popover: #f0dcd2;
+  --popover-foreground: #4a1e12;
+  --primary: #8a2e16;
+  --primary-foreground: #f5f8f5;
+  --secondary: #f0dcd2;
+  --secondary-foreground: #4a1e12;
+  --muted: #ede4dc;
   --muted-foreground: rgba(74, 30, 18, 0.55);
-  --accent: #F0DCD2;
-  --accent-foreground: #4A1E12;
+  --accent: #f0dcd2;
+  --accent-foreground: #4a1e12;
   --destructive: #c0392b;
-  --destructive-foreground: #F5F8F5;
+  --destructive-foreground: #f5f8f5;
   --border: rgba(74, 30, 18, 0.14);
-  --input: #F0DCD2;
-  --ring: #8A2E16;
+  --input: #f0dcd2;
+  --ring: #8a2e16;
   --radius: 0.75rem;
 
-  --sidebar: #EDE4DC;
-  --sidebar-foreground: #4A1E12;
-  --sidebar-primary: #8A2E16;
-  --sidebar-primary-foreground: #F5F8F5;
+  --sidebar: #ede4dc;
+  --sidebar-foreground: #4a1e12;
+  --sidebar-primary: #8a2e16;
+  --sidebar-primary-foreground: #f5f8f5;
   --sidebar-accent: rgba(138, 46, 22, 0.08);
-  --sidebar-accent-foreground: #8A2E16;
+  --sidebar-accent-foreground: #8a2e16;
   --sidebar-border: rgba(74, 30, 18, 0.1);
-  --sidebar-ring: #8A2E16;
+  --sidebar-ring: #8a2e16;
+
+  /* Match colors */
+  --match-low: #dd0016;
+  --match-medium: #fbcf4f;
+  --match-high: #00a27d;
 }
 
 /* ===================== HestIA DARK THEME ===================== */
 .dark {
-  --hestia-bg: #050505;
-  --hestia-card: #2C180F;
-  --hestia-card-2: #1E1209;
-  --hestia-text: #ECC7BE;
-  --hestia-accent: #C04020;
-  --hestia-accent-2: #A03010;
-  --hestia-muted: rgba(236, 199, 190, 0.5);
+  --hestia-bg: #0f100a;
+  --hestia-card: #2c180f;
+  --hestia-card-2: #1e1209;
+  --hestia-text: #ecc7be;
+  --hestia-accent: #c04020;
+  --hestia-accent-2: #a03010;
+  --hestia-muted: #ecc7bed6;
   --hestia-border: rgba(236, 199, 190, 0.1);
-  --hestia-sidebar: #070A05;
-  --hestia-input: #2C180F;
+  --hestia-sidebar: #070a05;
+  --hestia-input: #2c180f;
   --hestia-chip-bg: rgba(192, 64, 32, 0.18);
-  --hestia-chip-text: #E8795A;
+  --hestia-chip-text: #e8795a;
   --hestia-overlay: rgba(5, 5, 5, 0.88);
 
-  --background: #050505;
-  --foreground: #ECC7BE;
-  --card: #2C180F;
-  --card-foreground: #ECC7BE;
-  --popover: #2C180F;
-  --popover-foreground: #ECC7BE;
-  --primary: #C04020;
-  --primary-foreground: #F5F0EE;
-  --secondary: #2C180F;
-  --secondary-foreground: #ECC7BE;
-  --muted: #1E1209;
-  --muted-foreground: rgba(236, 199, 190, 0.55);
-  --accent: #2C180F;
-  --accent-foreground: #ECC7BE;
-  --destructive: #8B1A1A;
-  --destructive-foreground: #ECC7BE;
+  --background: #0f100a;
+  --foreground: #ecc7be;
+  --card: #2c180f;
+  --card-foreground: #ecc7be;
+  --popover: #2c180f;
+  --popover-foreground: #ecc7be;
+  --title: #e77858;
+  --primary: #c04020;
+  --primary-foreground: #f5f0ee;
+  --secondary: #2c180f;
+  --secondary-foreground: #ecc7be;
+  --muted: #1e1209;
+  --muted-foreground: #f5f5f0e7;
+  --accent: #2c180f;
+  --accent-foreground: #ecc7be;
+  --destructive: #8b1a1a;
+  --destructive-foreground: #ecc7be;
   --border: rgba(236, 199, 190, 0.1);
-  --input: #2C180F;
-  --ring: #C04020;
+  --input: #2c180f;
+  --ring: #c04020;
 
-  --sidebar: #070A05;
-  --sidebar-foreground: #ECC7BE;
-  --sidebar-primary: #C04020;
-  --sidebar-primary-foreground: #F5F0EE;
+  --sidebar: #070a05;
+  --sidebar-foreground: #ecc7be;
+  --sidebar-primary: #c04020;
+  --sidebar-primary-foreground: #f5f0ee;
   --sidebar-accent: rgba(192, 64, 32, 0.12);
-  --sidebar-accent-foreground: #E8795A;
+  --sidebar-accent-foreground: #e8795a;
   --sidebar-border: rgba(236, 199, 190, 0.08);
-  --sidebar-ring: #C04020;
+  --sidebar-ring: #c04020;
+
+  --match-low: #761922;
+  --match-medium: #deb331;
+  --match-high: #40b59a;
 }
 
 @theme inline {
-  --font-sans: 'Lato', sans-serif;
---font-serif: 'Playfair Display', serif;
-  --font-newsreader: 'Newsreader', serif;
+  --font-sans: "Lato", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-newsreader: "Newsreader", serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-title: var(--title);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -146,26 +157,32 @@
 
   html {
     background: var(--background);
+    cursor: default;
   }
 
   body {
     background: var(--background);
     color: var(--foreground);
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     line-height: 1.6;
     min-height: 100vh;
   }
 
   h1,
-h2,
-.font-editorial {
-  font-family: 'Playfair Display', serif;
-}
+  h2,
+  .font-editorial {
+    font-family: "Playfair Display", serif;
+  }
 }
 
 /* Smooth theme transitions */
-*, *::before, *::after {
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.2s ease;
 }
 
 /* Custom scrollbar */
@@ -186,8 +203,14 @@ h2,
 
 /* Chip animation */
 @keyframes chip-in {
-  from { opacity: 0; transform: scale(0.85) translateY(4px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 .chip-enter {
   animation: chip-in 0.18s ease-out forwards;
@@ -195,7 +218,9 @@ h2,
 
 /* Card hover elevation */
 .card-hover {
-  transition: box-shadow 0.22s ease, transform 0.22s ease;
+  transition:
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
 }
 .card-hover:hover {
   box-shadow: 0 8px 32px rgba(74, 30, 18, 0.12);
@@ -207,33 +232,64 @@ h2,
 
 /* Loading shimmer */
 @keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position: 400px 0; }
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
 }
 .shimmer {
-  background: linear-gradient(90deg, var(--hestia-card) 25%, var(--hestia-card-2) 50%, var(--hestia-card) 75%);
+  background: linear-gradient(
+    90deg,
+    var(--hestia-card) 25%,
+    var(--hestia-card-2) 50%,
+    var(--hestia-card) 75%
+  );
   background-size: 800px 100%;
   animation: shimmer 1.4s infinite linear;
 }
 
 /* Fade in */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .fade-up {
   animation: fade-up 0.35s ease-out forwards;
 }
 
 /* Stagger children */
-.stagger > *:nth-child(1) { animation-delay: 0ms; }
-.stagger > *:nth-child(2) { animation-delay: 60ms; }
-.stagger > *:nth-child(3) { animation-delay: 120ms; }
-.stagger > *:nth-child(4) { animation-delay: 180ms; }
-.stagger > *:nth-child(5) { animation-delay: 240ms; }
-.stagger > *:nth-child(6) { animation-delay: 300ms; }
-.stagger > *:nth-child(7) { animation-delay: 360ms; }
-.stagger > *:nth-child(8) { animation-delay: 420ms; }
+.stagger > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 300ms;
+}
+.stagger > *:nth-child(7) {
+  animation-delay: 360ms;
+}
+.stagger > *:nth-child(8) {
+  animation-delay: 420ms;
+}
 
 /* Focus ring */
 .focus-ring:focus-visible {
@@ -241,13 +297,20 @@ h2,
   outline-offset: 2px;
 }
 
-/* Match percent badge */
-.match-high   { background: rgba(34, 139, 34, 0.12); color: #2d7a2d; }
-.match-medium { background: rgba(184, 115, 51, 0.12); color: #a0621a; }
-.match-low    { background: rgba(138, 46, 22, 0.1);  color: #8A2E16; }
-.dark .match-high   { background: rgba(34, 139, 34, 0.18); color: #6dbf6d; }
-.dark .match-medium { background: rgba(184, 115, 51, 0.18); color: #e0a050; }
-.dark .match-low    { background: rgba(192, 64, 32, 0.18);  color: #e8795a; }
+/* Match percent badge*/
+/* ===================== Match percent badge ===================== */
+
+.match-low {
+  color: var(--match-low);
+}
+
+.match-medium {
+  color: var(--match-medium);
+}
+
+.match-high {
+  color: var(--match-high);
+}
 
 /* Carrusel */
 
@@ -281,17 +344,29 @@ h2,
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-150px * 7)); /* El ancho de una sola tanda de iconos */
+    transform: translateX(
+      calc(-150px * 7)
+    ); /* El ancho de una sola tanda de iconos */
   }
 }
 
 /* 1. Esta es la animación del botón de fueguito */
 @keyframes flicker {
-  0%   { transform: rotate(-4deg) scale(1); }
-  25%  { transform: rotate(3deg) scale(1.08); }
-  50%  { transform: rotate(-2deg) scale(1.04); }
-  75%  { transform: rotate(4deg) scale(1.1); }
-  100% { transform: rotate(-4deg) scale(1); }
+  0% {
+    transform: rotate(-4deg) scale(1);
+  }
+  25% {
+    transform: rotate(3deg) scale(1.08);
+  }
+  50% {
+    transform: rotate(-2deg) scale(1.04);
+  }
+  75% {
+    transform: rotate(4deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(-4deg) scale(1);
+  }
 }
 
 /* 2. Esto es para usar esa animación, pero solo cuando hay hover */
