@@ -13,6 +13,7 @@ import {
   ChevronUp,
   Sparkles,
   ChefHat,
+  SlidersHorizontal,
 } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -142,13 +143,13 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4">
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      <div className="relative w-full sm:max-w-md bg-(--hestia-card) border border-(--hestia-border) rounded-t-3xl sm:rounded-3xl p-6 space-y-5 shadow-2xl">
+      <div className="relative w-full sm:max-w-md max-h-[92dvh] overflow-y-auto bg-(--hestia-card) border border-(--hestia-border) rounded-t-3xl sm:rounded-3xl p-4 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl">
         <div className="flex items-center justify-between">
           <h2 className="font-serif text-xl font-bold text-(--hestia-text)">
             Agregar ingrediente
@@ -242,7 +243,7 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
           </div>
 
           {/* Cantidad y unidad */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="flex flex-col gap-1">
               <label className="text-xs text-(--hestia-muted)">Cantidad</label>
 
@@ -294,7 +295,7 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
           </div>
 
           {/* Acciones */}
-          <div className="flex gap-3 pt-1">
+          <div className="flex flex-col-reverse sm:flex-row gap-3 pt-1">
             <button
               type="button"
               onClick={onClose}
@@ -337,12 +338,12 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
         item.status === "expired" ? "opacity-70" : ""
       }`}
     >
-      <div className="flex items-center gap-3 px-4 py-3">
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 px-3 sm:px-4 py-3">
         {/* Icono */}
         <span className="w-7 shrink-0 text-center text-xl">{item.icon}</span>
 
         {/* Nombre y categoría */}
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 basis-[calc(100%-5rem)] sm:basis-auto">
           <p
             className={`truncate text-sm font-semibold ${
               item.status === "expired"
@@ -357,7 +358,7 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
         </div>
 
         {/* Cantidad */}
-        <div className="flex items-center gap-1">
+        <div className="order-3 sm:order-none flex items-center gap-1 ml-10 sm:ml-0">
           <button
             type="button"
             onClick={() => adjust(-1)}
@@ -368,7 +369,7 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
             <Minus size={11} />
           </button>
 
-          <span className="min-w-20 text-center text-sm font-medium text-(--hestia-text)">
+          <span className="min-w-16 sm:min-w-20 text-center text-sm font-medium text-(--hestia-text)">
             {item.quantity} {item.unit}
           </span>
 
@@ -437,6 +438,8 @@ export default function DespensaPage() {
   const [query, setQuery] = useState("");
 
   const [activeCategory, setActiveCategory] = useState("Todos");
+
+  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
 
   const [showAdd, setShowAdd] = useState(false);
 
@@ -717,8 +720,8 @@ export default function DespensaPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 md:px-6 py-8 space-y-8">
-      <div className="flex items-start justify-between gap-4">
+    <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-5 sm:py-8 space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="space-y-1">
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-(--hestia-text)">
             Mi Despensa
@@ -730,34 +733,34 @@ export default function DespensaPage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-end gap-2">
+        <div className="grid grid-cols-3 sm:flex sm:flex-wrap sm:justify-end gap-2 w-full sm:w-auto">
           <button
             type="button"
             onClick={searchRecipesFromPantry}
             disabled={pantryItems.length === 0}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-(--hestia-accent) text-(--hestia-accent) text-sm font-semibold hover:bg-(--hestia-chip-bg) transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-(--hestia-accent) text-(--hestia-accent) text-sm font-semibold hover:bg-(--hestia-chip-bg) transition-all disabled:cursor-not-allowed disabled:opacity-50"
           >
             <ChefHat size={16} />
-            <span className="hidden sm:inline">Buscar recetas</span>
+            <span className="text-xs sm:text-sm">Buscar</span>
           </button>
 
           <button
             type="button"
             onClick={() => setShowAiModal(true)}
             disabled={pantryItems.length === 0}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-(--hestia-accent) text-white text-sm font-semibold hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-(--hestia-accent) text-white text-sm font-semibold hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Sparkles size={16} />
-            <span className="hidden sm:inline">Generar con IA</span>
+            <span className="text-xs sm:text-sm">Generar IA</span>
           </button>
 
           <button
             type="button"
             onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-(--hestia-accent) text-(--hestia-accent) text-sm font-semibold hover:bg-(--hestia-chip-bg) transition-all disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-(--hestia-accent) text-(--hestia-accent) text-sm font-semibold hover:bg-(--hestia-chip-bg) transition-all disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Plus size={16} />
-            <span className="hidden sm:inline">Agregar</span>
+            <span className="text-xs sm:text-sm">Agregar</span>
           </button>
         </div>
       </div>
@@ -775,15 +778,15 @@ export default function DespensaPage() {
       )}
 
       {generatedRecipe && (
-        <section className="rounded-2xl border border-(--hestia-accent)/30 bg-(--hestia-card) p-5 space-y-5">
-          <div className="flex items-start justify-between gap-4">
+        <section className="rounded-2xl border border-(--hestia-accent)/30 bg-(--hestia-card) p-4 sm:p-5 space-y-4 sm:space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-(--hestia-accent)">
                 <Sparkles size={14} />
                 Receta generada
               </div>
 
-              <h2 className="mt-2 font-serif text-2xl font-bold text-(--hestia-text)">
+              <h2 className="mt-2 font-serif text-xl sm:text-2xl font-bold text-(--hestia-text)">
                 {generatedRecipe.title}
               </h2>
 
@@ -817,7 +820,7 @@ export default function DespensaPage() {
             </span>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-5 lg:grid-cols-2">
             {/* Ingredientes */}
             <div>
               <h3 className="mb-3 text-sm font-semibold text-(--hestia-text)">
@@ -899,12 +902,12 @@ export default function DespensaPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             <button
               type="button"
               onClick={saveGeneratedRecipe}
               disabled={savingGeneratedRecipe}
-              className="rounded-xl bg-(--hestia-accent) px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
+              className="w-full sm:w-auto rounded-xl bg-(--hestia-accent) px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
             >
               {savingGeneratedRecipe ? "Guardando..." : "Guardar receta"}
             </button>
@@ -912,7 +915,7 @@ export default function DespensaPage() {
             <button
               type="button"
               onClick={() => setShowAiModal(true)}
-              className="rounded-xl border border-(--hestia-border) px-4 py-2 text-sm font-medium text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
+              className="w-full sm:w-auto rounded-xl border border-(--hestia-border) px-4 py-2.5 text-sm font-medium text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
             >
               Generar otra
             </button>
@@ -921,7 +924,7 @@ export default function DespensaPage() {
       )}
 
       {(expiringCount > 0 || expiredCount > 0) && (
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {expiringCount > 0 && (
             <button
               type="button"
@@ -973,63 +976,116 @@ export default function DespensaPage() {
         </div>
       )}
 
-      <div className="relative">
-        <Search
-          size={16}
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-(--hestia-muted)"
-        />
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          {/* Buscar ingrediente */}
+          <div className="relative flex-1 min-w-0">
+            <Search
+              size={16}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-(--hestia-muted)"
+            />
 
-        <input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Buscar ingrediente..."
-          className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) placeholder:text-(--hestia-muted) outline-none focus:border-(--hestia-accent) transition-colors"
-        />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Buscar ingrediente..."
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) placeholder:text-(--hestia-muted) outline-none focus:border-(--hestia-accent) transition-colors"
+            />
 
-        {query && (
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-(--hestia-muted)"
+                aria-label="Limpiar búsqueda"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          {/* Filtros */}
           <button
             type="button"
-            onClick={() => setQuery("")}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-(--hestia-muted)"
+            onClick={() => setShowCategoryFilters((current) => !current)}
+            className={`shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
+              showCategoryFilters || activeCategory !== "Todos"
+                ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
+                : "bg-(--hestia-input) border-(--hestia-border) text-(--hestia-text)"
+            }`}
           >
-            <X size={14} />
+            <SlidersHorizontal size={16} />
+
+            <span>Filtros</span>
+
+            {activeCategory !== "Todos" && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-white/20 px-1.5 text-xs">
+                1
+              </span>
+            )}
           </button>
+        </div>
+
+        {showCategoryFilters && (
+          <div className="rounded-2xl bg-(--hestia-card) border border-(--hestia-border) p-4">
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-(--hestia-text)/70">
+                Categoría
+              </p>
+
+              {activeCategory !== "Todos" && (
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory("Todos")}
+                  className="text-xs font-medium text-(--hestia-accent) hover:underline"
+                >
+                  Limpiar
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {["Todos", ...CATEGORIES].map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(category);
+
+                    if (window.innerWidth < 640) {
+                      setShowCategoryFilters(false);
+                    }
+                  }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
+                    activeCategory === category
+                      ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
+                      : "border-(--hestia-border) text-(--hestia-text)/75 hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
+                  }`}
+                >
+                  {category !== "Todos" && CATEGORY_ICONS[category]}
+
+                  {category}
+
+                  <span
+                    className={`text-xs rounded-full px-1.5 py-0.5 font-semibold ${
+                      activeCategory === category
+                        ? "bg-white/20 text-white"
+                        : "bg-(--hestia-chip-bg) text-(--hestia-chip-text)"
+                    }`}
+                  >
+                    {category === "Todos"
+                      ? pantryItems.length
+                      : categoryCounts[category] || 0}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
       </div>
 
-      <div className="flex gap-2 flex-wrap">
-        {["Todos", ...CATEGORIES].map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => setActiveCategory(category)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
-              activeCategory === category
-                ? "bg-(--hestia-accent) border-(--hestia-accent) text-white"
-                : "border-(--hestia-border) text-(--hestia-muted) hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
-            }`}
-          >
-            {category !== "Todos" && CATEGORY_ICONS[category]}
-
-            {category}
-
-            <span
-              className={`text-xs rounded-full px-1.5 py-0.5 font-semibold ${
-                activeCategory === category
-                  ? "bg-white/20 text-white"
-                  : "bg-(--hestia-chip-bg) text-(--hestia-chip-text)"
-              }`}
-            >
-              {category === "Todos"
-                ? pantryItems.length
-                : categoryCounts[category] || 0}
-            </span>
-          </button>
-        ))}
-      </div>
-
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 py-20 text-center">
+        <div className="flex flex-col items-center gap-4 py-12 sm:py-20 text-center px-4">
           <div className="w-16 h-16 rounded-2xl bg-(--hestia-card) border border-(--hestia-border) flex items-center justify-center">
             <ShoppingBasket size={28} className="text-(--hestia-muted)" />
           </div>
@@ -1085,7 +1141,7 @@ export default function DespensaPage() {
       )}
 
       {showAiModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4">
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => {
@@ -1095,7 +1151,7 @@ export default function DespensaPage() {
             }}
           />
 
-          <div className="relative w-full sm:max-w-md bg-(--hestia-card) border border-(--hestia-border) rounded-t-3xl sm:rounded-3xl p-6 space-y-5 shadow-2xl">
+          <div className="relative w-full sm:max-w-md max-h-[92dvh] overflow-y-auto bg-(--hestia-card) border border-(--hestia-border) rounded-t-3xl sm:rounded-3xl p-4 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-(--hestia-chip-bg)">
@@ -1171,7 +1227,7 @@ export default function DespensaPage() {
               </p>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col-reverse sm:flex-row gap-3">
               <button
                 type="button"
                 onClick={() => setShowAiModal(false)}
