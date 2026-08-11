@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-import { Camera, Star, ChefHat, ArrowRight, Clock } from "lucide-react";
+import { Camera, Star, ChefHat, ArrowRight, Clock, Download, Check } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -20,6 +20,73 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState("");
+
+  const [installPrompt, setInstallPrompt] = useState(null);
+
+  const [isInstalled, setIsInstalled] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return window.matchMedia("(display-mode: standalone)").matches;
+  });
+
+
+  useEffect(() => {
+    function handleBeforeInstallPrompt(event) {
+      event.preventDefault();
+      setInstallPrompt(event);
+    }
+
+    function handleAppInstalled() {
+      setIsInstalled(true);
+      setInstallPrompt(null);
+    }
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      handleBeforeInstallPrompt,
+    );
+
+    window.addEventListener(
+      "appinstalled",
+      handleAppInstalled,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt,
+      );
+
+      window.removeEventListener(
+        "appinstalled",
+        handleAppInstalled,
+      );
+    };
+  }, []);
+
+  async function handleInstall() {
+    if (isInstalled) {
+      alert("HestIA ya está instalada en este dispositivo.");
+      return;
+    }
+
+    if (!installPrompt) {
+      alert(
+        "La instalación automática no está disponible en este momento. Abrí el menú de Chrome o Edge y elegí “Instalar HestIA” o “Agregar a pantalla de inicio”.",
+      );
+      return;
+    }
+
+    installPrompt.prompt();
+
+    const result = await installPrompt.userChoice;
+
+    if (result.outcome === "accepted") {
+      setInstallPrompt(null);
+    }
+  }
 
   useEffect(() => {
     async function loadFeaturedRecipes() {
@@ -103,6 +170,28 @@ function HomePage() {
                   <ChefHat size={16} />
                   Explorar recetas
                 </Link>
+
+                <button
+                  type="button"
+                  onClick={handleInstall}
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                    isInstalled
+                      ? "border border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-300"
+                      : "border-2 border-(--hestia-border) bg-(--hestia-card)/70 text-(--hestia-text) hover:border-(--hestia-accent) hover:text-(--hestia-accent)"
+                  }`}
+                >
+                  {isInstalled ? (
+                    <>
+                      <Check size={16} />
+                      HestIA instalada
+                    </>
+                  ) : (
+                    <>
+                      <Download size={16} />
+                      Instalar HestIA
+                    </>
+                  )}
+                </button>
               </div>
 
               <div className="flex gap-8 pt-4 border-t border-(--hestia-border)">
