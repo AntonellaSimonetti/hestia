@@ -338,57 +338,79 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
         item.status === "expired" ? "opacity-70" : ""
       }`}
     >
-      {/* Parte principal */}
-      <div className="p-3 sm:p-4">
+      {/* ================= MOBILE ================= */}
+      <div className="sm:hidden px-3.5 py-3.5">
+        {/* Fila superior */}
         <div className="flex items-start gap-3">
-          {/* Icono */}
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-(--hestia-bg)/70 text-2xl">
-            {item.icon}
+          <span className="w-8 shrink-0 text-center text-xl">{item.icon}</span>
+
+          <div className="min-w-0 flex-1">
+            <p
+              className={`truncate text-sm font-semibold leading-tight ${
+                item.status === "expired"
+                  ? "line-through text-(--hestia-muted)"
+                  : "text-(--hestia-text)"
+              }`}
+            >
+              {item.name}
+            </p>
+
+            <p className="mt-0.5 text-xs text-(--hestia-text)/65">
+              {item.category}
+            </p>
           </div>
 
-          {/* Nombre / categoría */}
-          <div className="min-w-0 flex-1 pt-0.5">
-            <div className="flex items-start justify-between gap-2">
-              <div className="min-w-0">
-                <p
-                  className={`truncate text-sm sm:text-base font-semibold leading-tight ${
-                    item.status === "expired"
-                      ? "line-through text-(--hestia-muted)"
-                      : "text-(--hestia-text)"
-                  }`}
-                >
-                  {item.name}
-                </p>
-
-                <p className="mt-1 text-xs text-(--hestia-text)/65">
-                  {item.category}
-                </p>
-              </div>
-
-              {/* Estado visible también en mobile */}
-              <span
-                className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] sm:text-xs font-semibold ${
-                  STATUS_STYLE[item.status]
-                }`}
-              >
-                {STATUS_LABEL[item.status]}
-              </span>
-            </div>
-          </div>
+          <span
+            className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+              STATUS_STYLE[item.status]
+            }`}
+          >
+            {STATUS_LABEL[item.status]}
+          </span>
         </div>
 
-        {/* Controles */}
-        <div className="mt-3 flex items-center justify-between gap-3 border-t border-(--hestia-border) pt-3">
-          {/* Acciones secundarias */}
+        {/* Separador */}
+        <div className="my-3 h-px bg-(--hestia-border)" />
+
+        {/* Fila inferior */}
+        <div className="flex items-center justify-between gap-3">
+          {/* Cantidad */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => adjust(-1)}
+              disabled={busy}
+              aria-label="Reducir cantidad"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-(--hestia-border) bg-(--hestia-bg)/35 text-(--hestia-text)/70 transition-colors hover:bg-(--hestia-chip-bg) disabled:opacity-50"
+            >
+              <Minus size={11} />
+            </button>
+
+            <span className="min-w-18 text-center text-sm font-semibold text-(--hestia-text)">
+              {item.quantity} {item.unit}
+            </span>
+
+            <button
+              type="button"
+              onClick={() => adjust(1)}
+              disabled={busy}
+              aria-label="Aumentar cantidad"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-(--hestia-border) bg-(--hestia-bg)/35 text-(--hestia-text)/70 transition-colors hover:bg-(--hestia-chip-bg) disabled:opacity-50"
+            >
+              <Plus size={11} />
+            </button>
+          </div>
+
+          {/* Acciones */}
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => setExpanded((current) => !current)}
               aria-label="Ver detalles"
               title="Ver detalles"
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-(--hestia-text)/65 transition-colors hover:bg-(--hestia-chip-bg) hover:text-(--hestia-accent)"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-(--hestia-text)/60 transition-colors hover:bg-(--hestia-chip-bg) hover:text-(--hestia-accent)"
             >
-              {expanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+              {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             </button>
 
             <button
@@ -402,39 +424,92 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
               <Trash2 size={14} />
             </button>
           </div>
-
-          {/* Cantidad */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => adjust(-1)}
-              disabled={busy}
-              aria-label="Reducir cantidad"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-(--hestia-border) bg-(--hestia-bg)/50 text-(--hestia-text) transition-colors hover:border-(--hestia-accent) hover:bg-(--hestia-chip-bg) disabled:opacity-50"
-            >
-              <Minus size={12} />
-            </button>
-
-            <span className="min-w-20 text-center text-sm font-semibold text-(--hestia-text)">
-              {item.quantity} {item.unit}
-            </span>
-
-            <button
-              type="button"
-              onClick={() => adjust(1)}
-              disabled={busy}
-              aria-label="Aumentar cantidad"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-(--hestia-border) bg-(--hestia-bg)/50 text-(--hestia-text) transition-colors hover:border-(--hestia-accent) hover:bg-(--hestia-chip-bg) disabled:opacity-50"
-            >
-              <Plus size={12} />
-            </button>
-          </div>
         </div>
+      </div>
+
+      {/* ================= DESKTOP ================= */}
+      <div className="hidden sm:flex items-center gap-3 px-4 py-3">
+        {/* Icono */}
+        <span className="w-7 shrink-0 text-center text-xl">{item.icon}</span>
+
+        {/* Nombre y categoría */}
+        <div className="min-w-0 flex-1">
+          <p
+            className={`truncate text-sm font-semibold ${
+              item.status === "expired"
+                ? "line-through text-(--hestia-muted)"
+                : "text-(--hestia-text)"
+            }`}
+          >
+            {item.name}
+          </p>
+
+          <p className="text-xs text-(--hestia-muted)">{item.category}</p>
+        </div>
+
+        {/* Cantidad */}
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => adjust(-1)}
+            disabled={busy}
+            aria-label="Reducir cantidad"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-(--hestia-border) text-(--hestia-muted) transition-colors hover:bg-(--hestia-chip-bg) disabled:opacity-50"
+          >
+            <Minus size={11} />
+          </button>
+
+          <span className="min-w-20 text-center text-sm font-medium text-(--hestia-text)">
+            {item.quantity} {item.unit}
+          </span>
+
+          <button
+            type="button"
+            onClick={() => adjust(1)}
+            disabled={busy}
+            aria-label="Aumentar cantidad"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-(--hestia-border) text-(--hestia-muted) transition-colors hover:bg-(--hestia-chip-bg) disabled:opacity-50"
+          >
+            <Plus size={11} />
+          </button>
+        </div>
+
+        {/* Estado */}
+        <span
+          className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${
+            STATUS_STYLE[item.status]
+          }`}
+        >
+          {STATUS_LABEL[item.status]}
+        </span>
+
+        {/* Expandir */}
+        <button
+          type="button"
+          onClick={() => setExpanded((current) => !current)}
+          aria-label="Ver detalles"
+          title="Ver detalles"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-(--hestia-muted) transition-colors hover:bg-(--hestia-chip-bg)"
+        >
+          {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+        </button>
+
+        {/* Eliminar */}
+        <button
+          type="button"
+          onClick={() => onRemove(item.id)}
+          disabled={busy}
+          aria-label="Eliminar ingrediente"
+          title="Eliminar ingrediente"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-(--hestia-muted) transition-colors hover:bg-red-100 hover:text-red-500 disabled:opacity-50 dark:hover:bg-red-900/20"
+        >
+          <Trash2 size={16} />
+        </button>
       </div>
 
       {/* Detalle desplegable */}
       {expanded && (
-        <div className="border-t border-(--hestia-border) bg-(--hestia-bg)/35 px-4 py-2.5 text-xs text-(--hestia-text)/70">
+        <div className="border-t border-(--hestia-border) px-4 py-2.5 text-xs text-(--hestia-text)/70 sm:text-(--hestia-muted)">
           {item.expiresIn < 0
             ? "Ya vencido"
             : item.expiresIn === 0
