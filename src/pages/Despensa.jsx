@@ -297,7 +297,10 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
               min={-1}
               value={expiresIn}
               disabled={saving}
-              onChange={(event) => setExpiresIn(Number(event.target.value))}
+              onFocus={(event) => event.target.select()}
+              onChange={(event) => {
+                setExpiresIn(event.target.value);
+              }}
               className="w-full px-3 py-2 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) outline-none focus:border-(--hestia-accent) transition-colors"
             />
           </div>
