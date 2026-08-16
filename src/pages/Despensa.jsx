@@ -130,7 +130,7 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
     const created = await onAdd({
       name: name.trim(),
       category,
-      quantity,
+      quantity: Number(quantity) || 1,
       unit,
       status,
       icon,
@@ -253,9 +253,17 @@ function AddIngredientForm({ onClose, onAdd, saving }) {
                 step={0.1}
                 value={quantity}
                 disabled={saving}
-                onChange={(event) =>
-                  setQuantity(Number(event.target.value) || 1)
-                }
+                onFocus={(event) => event.target.select()}
+                onChange={(event) => {
+                  const value = event.target.value;
+
+                  setQuantity(value === "" ? "" : Number(value));
+                }}
+                onBlur={() => {
+                  if (quantity === "" || Number(quantity) <= 0) {
+                    setQuantity(1);
+                  }
+                }}
                 className="w-full px-3 py-2 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) outline-none focus:border-(--hestia-accent) transition-colors"
               />
             </div>
@@ -324,8 +332,17 @@ function PantryRow({ item, onUpdate, onRemove, busyId }) {
 
   const busy = busyId === item.id;
 
-  async function adjust(delta) {
-    const nextQuantity = Math.max(0, Number(item.quantity) + delta);
+  async function adjust(direction) {
+    const wholeUnits = ["unidades", "frasco", "botella", "cabeza", "paquete"];
+
+    const step = wholeUnits.includes(item.unit) ? 1 : 0.1;
+
+    const currentQuantity = Number(item.quantity);
+
+    const nextQuantity = Math.max(
+      0,
+      Number((currentQuantity + direction * step).toFixed(2)),
+    );
 
     await onUpdate(item.id, {
       quantity: nextQuantity,
@@ -612,7 +629,6 @@ export default function DespensaPage() {
         setLoading(false);
       }
     }
-
     loadPantry();
   }, []);
 

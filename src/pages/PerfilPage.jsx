@@ -138,6 +138,79 @@ function EditNameModal({ currentName, onSave, onClose, saving }) {
   );
 }
 
+function EditBioModal({ currentBio, onSave, onClose, saving }) {
+  const [value, setValue] = useState(currentBio || "");
+
+  async function handleSave() {
+    const saved = await onSave(value.trim());
+
+    if (saved) {
+      onClose();
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      <div className="relative w-full sm:max-w-md bg-(--hestia-card) border border-(--hestia-border) rounded-t-3xl sm:rounded-3xl p-6 space-y-4 shadow-2xl">
+        <div className="flex items-center justify-between">
+          <h2 className="font-serif text-lg font-bold text-(--hestia-text)">
+            Editar descripción
+          </h2>
+
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            className="p-2 rounded-lg hover:bg-(--hestia-chip-bg) transition-colors"
+          >
+            <X size={16} className="text-(--hestia-muted)" />
+          </button>
+        </div>
+
+        <textarea
+          autoFocus
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          maxLength={160}
+          rows={4}
+          disabled={saving}
+          placeholder="Contanos un poco sobre vos..."
+          className="w-full resize-none px-3 py-2.5 rounded-xl bg-(--hestia-input) border border-(--hestia-border) text-sm text-(--hestia-text) placeholder:text-(--hestia-muted) outline-none focus:border-(--hestia-accent) transition-colors disabled:opacity-60"
+        />
+
+        <p className="text-right text-xs text-(--hestia-muted)">
+          {value.length}/160
+        </p>
+
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            className="flex-1 py-2 rounded-xl border border-(--hestia-border) text-sm font-medium text-(--hestia-muted) hover:border-(--hestia-accent) transition-all disabled:opacity-60"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={saving}
+            className="flex-1 py-2 rounded-xl bg-(--hestia-accent) text-white text-sm font-semibold hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {saving ? "Guardando..." : "Guardar"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PerfilPage() {
   const navigate = useNavigate();
   const avatarInputRef = useRef(null);
@@ -164,6 +237,8 @@ export default function PerfilPage() {
   const [generatedRecipes, setGeneratedRecipes] = useState([]);
 
   const [editingName, setEditingName] = useState(false);
+
+  const [editingBio, setEditingBio] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
@@ -466,9 +541,21 @@ export default function PerfilPage() {
 
             <p className="text-sm text-(--hestia-muted)">@{profile.username}</p>
 
-            <p className="text-sm text-(--hestia-text) leading-relaxed">
-              {profile.bio || "Todavía no agregaste una biografía."}
-            </p>
+            <div className="flex items-start gap-2">
+              <p className="text-sm text-(--hestia-text) leading-relaxed">
+                {profile.bio || "Todavía no agregaste una biografía."}
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setEditingBio(true)}
+                aria-label="Editar descripción"
+                title="Editar descripción"
+                className="shrink-0 p-1 rounded-lg text-(--hestia-muted) hover:bg-(--hestia-chip-bg) hover:text-(--hestia-accent) transition-colors"
+              >
+                <Edit3 size={13} />
+              </button>
+            </div>
 
             <p className="text-xs text-(--hestia-muted) flex items-center gap-1 mt-1">
               <Star size={11} />
@@ -685,6 +772,14 @@ export default function PerfilPage() {
           saving={saving}
           onSave={(name) => updateProfile({ name })}
           onClose={() => setEditingName(false)}
+        />
+      )}
+      {editingBio && (
+        <EditBioModal
+          currentBio={profile.bio}
+          saving={saving}
+          onSave={(bio) => updateProfile({ bio })}
+          onClose={() => setEditingBio(false)}
         />
       )}
     </div>
